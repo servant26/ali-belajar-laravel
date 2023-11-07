@@ -13,9 +13,11 @@ use App\Http\Controllers\HelloController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/helloworld', [HelloController::class, 'index']);
+Route::get('/', [HelloController::class, 'index']);
+Route::get('/programming_web', [HelloController::class, 'programming_web']);
+Route::get('/programming_language', [HelloController::class, 'programming_language']);
 
