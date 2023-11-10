@@ -25,6 +25,7 @@
             <tr>
                 <th>No</th>
                 <th>Nama Produk</th>
+                <th>Gambar</th>
                 <th>Kategori</th>
                 <th>Deskripsi</th>
                 <th>Harga</th>
@@ -39,6 +40,9 @@
             <tbody>
                 <td>{{ $no++ }}</td>
                 <td>{{ $p->product_name }}</td>
+                <td>
+                  <img src="{{ asset($p->image) }}" alt="Gambar Produk" width="100">
+                </td>                           
                 <td>{{ $p->category_name }}</td>
                 <td>{{ $p->description }}</td>
                 <td>{{ $p->price }}</td>

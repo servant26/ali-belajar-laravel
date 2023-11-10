@@ -6,7 +6,7 @@
     <section class="content">
         <div class="container-fluid">
           <div class="container mt-1 mb-5">
-        <form action="/crud/add" method="post">
+        <form action="/crud/add" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="mb-3">
               <label for="inputNama" class="form-label">Nama Produk</label>
@@ -32,10 +32,10 @@
               <label for="inputStok" class="form-label">Stok</label>
               <input type="number" class="form-control" id="inputStok" name="stock" required>
             </div>
-            {{-- <div class="mb-5">
-              <label for="inputGambar" class="form-label">Upload Gambar (Maksimal 2MB)</label>
-              <input type="file" class="form-control" id="image" name="image[]" multiple required>
-            </div> --}}
+            <div class="mb-5">
+              <label for="inputGambar" class="form-label">Unggah Gambar</label>
+              <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+            </div>
             <div class="d-grid gap-2 d-md-block">
               <a class="btn btn-danger" href="/crud" role="button">Kembali</a>
               <button type="submit" class="btn btn-primary">Simpan</button>

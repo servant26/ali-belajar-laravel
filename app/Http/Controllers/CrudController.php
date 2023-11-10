@@ -21,18 +21,29 @@ class CrudController extends Controller
         return view("tambah");
     }
 
-    public function add(Request $request){
-
+    public function add(Request $request)
+    {
+        $request->validate([
+            // ... aturan validasi yang sudah ada ...
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+    
+        // Tangani unggahan gambar
+        $imageName = time().'.'.$request->image->extension();
+        $request->image->move(public_path('images'), $imageName);
+    
+        // Masukkan data ke database
         DB::table('products')->insert([
             'product_name' => $request->input('product_name'),
             'category_id'=> $request->input('category_id'),
             'description'=> $request->input('description'),
             'price'=> $request->input('price'),
-            'stock'=> $request->input('stock')
+            'stock'=> $request->input('stock'),
+            'image' => 'images/' . $imageName, // Simpan jalur gambar
         ]);
+    
         return redirect('/crud');
-       
-    }
+    }    
 
     public function hapus($id){
         DB::table('products')->where('id',$id)->delete();
@@ -44,14 +55,35 @@ class CrudController extends Controller
         return view('edit',['products'=>$products]);
     }
 
-    public function update(Request $request){
-        DB::table('products')->where('id',$request->id)->update([
-            'product_name' => $request->input('product_name'),
-            'category_id'=> $request->input('category_id'),
-            'description'=> $request->input('description'),
-            'price'=> $request->input('price'),
-            'stock'=> $request->input('stock')
+    public function update(Request $request)
+    {
+        $request->validate([
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
+
+        if ($request->hasFile('image')) {
+            $imageName = time().'.'.$request->image->extension();
+            $request->image->move(public_path('images'), $imageName);
+            
+            DB::table('products')->where('id', $request->id)->update([
+                'product_name' => $request->input('product_name'),
+                'category_id' => $request->input('category_id'),
+                'description' => $request->input('description'),
+                'price' => $request->input('price'),
+                'stock' => $request->input('stock'),
+                'image' => 'images/' . $imageName,
+            ]);
+        } else {
+            DB::table('products')->where('id', $request->id)->update([
+                'product_name' => $request->input('product_name'),
+                'category_id' => $request->input('category_id'),
+                'description' => $request->input('description'),
+                'price' => $request->input('price'),
+                'stock' => $request->input('stock'),
+            ]);
+        }
+    
         return redirect('/crud');
     }
+    
 }

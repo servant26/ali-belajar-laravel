@@ -7,7 +7,7 @@
         <div class="container-fluid">
           <div class="container mt-1 mb-5">
         @foreach ($products as $p)
-        <form action="/crud/update" method="post">
+        <form action="/crud/update" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <input type="hidden" name="id" value="{{ $p->id }}"><br>
             <div class="mb-3">
@@ -34,10 +34,14 @@
               <label for="inputStok" class="form-label">Stok</label>
               <input type="number" class="form-control" id="inputStok" name="stock" required value="{{ $p->stock }}">
             </div>
-            {{-- <div class="mb-5">
-              <label for="inputGambar" class="form-label">Upload Gambar (Maksimal 2MB)</label>
-              <input type="file" class="form-control" id="image" name="image[]" multiple required>
-            </div> --}}
+            <div class="mb-3">
+                <label for="currentImage">Gambar Saat Ini:</label><br>
+                <img src="{{ asset($p->image) }}" alt="Gambar Produk" width="25%">
+            </div>
+            <div class="mb-3">
+              <label for="inputGambar" class="form-label">Unggah Gambar Baru (Maksimal 2MB)</label>
+              <input type="file" class="form-control" id="image" name="image" accept="image/*">
+            </div>
             <div class="d-grid gap-2 d-md-block">
               <a class="btn btn-danger" href="/crud" role="button">Kembali</a>
               <button type="submit" class="btn btn-primary">Simpan</button>
