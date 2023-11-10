@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HelloController;
+use App\Http\Controllers\CrudController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,4 +21,10 @@ use App\Http\Controllers\HelloController;
 Route::get('/', [HelloController::class, 'index']);
 Route::get('/programming_web', [HelloController::class, 'programming_web']);
 Route::get('/programming_language', [HelloController::class, 'programming_language']);
+Route::get('/crud', [CrudController::class, 'index']);
+Route::get('/crud/tambah', [CrudController::class, 'tambah']);
+Route::post('/crud/add', [CrudController::class, 'add']);
+Route::get('/crud/hapus/{id}', [CrudController::class, 'hapus']);
+Route::get('/crud/edit/{id}', [CrudController::class, 'edit']);
+Route::post('/crud/update', [CrudController::class, 'update']);
 
