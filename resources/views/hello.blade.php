@@ -10,6 +10,9 @@
 
             <!-- Profile Image -->
             <div class="card card-primary card-outline">
+              <div class="card-header">
+                <h3 class="card-title">Bio saya</h3>
+              </div>
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle"
@@ -22,19 +25,19 @@
                 <p class="text-muted text-center">Motto hidup : Jalani, pelajari, manfaatkan dan terapkan</p>
 
                 <ul class="list-group list-group-unbordered mb-3">
-                  <li class="list-group-item">
+                  <li class="list-group-item text-white">
                     <b>Github</b> <a href="#" class="btn btn-dark float-right"><b>Follow</b></a>
                   </li>
-                  <li class="list-group-item">
+                  <li class="list-group-item text-white">
                     <b>Tiktok</b> <a href="#" class="btn btn-dark float-right"><b>Follow</b></a>
                   </li>
-                  <li class="list-group-item">
+                  <li class="list-group-item text-white">
                     <b>Facebook</b> <a href="#" class="btn btn-primary float-right"><b>Follow</b></a>
                   </li>
-                  <li class="list-group-item">
+                  <li class="list-group-item text-white">
                     <b>Instagram</b> <a href="#" class="btn btn-danger float-right"><b>Follow</b></a>
                   </li>
-                  <li class="list-group-item">
+                  <li class="list-group-item text-white">
                     <b>Youtube</b> <a href="#" class="btn btn-danger float-right"><b>Follow</b></a>
                   </li>
                 </ul>

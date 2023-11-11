@@ -15,6 +15,11 @@
   <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
   <link href="{{ asset('bt\css\bootstrap.min.css') }}" rel="stylesheet">
   <script src="{{ asset('bt\js\bootstrap.bundle.min.js') }}"></script>
+  <style>
+    .alert {
+            transition: opacity 0.5s ease-in-out;
+        }
+  </style>
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">

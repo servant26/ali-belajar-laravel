@@ -2,6 +2,19 @@
 @section('title','CRUD')
 
 @section('content')
+@if(session('success'))
+<div id="notification" class="alert alert-success">
+    {{ session('success') }}
+</div>
+<script>
+    setTimeout(function() {
+        document.getElementById('notification').style.opacity = '0';
+        setTimeout(function() {
+            document.getElementById('notification').style.display = 'none';
+        }, 500); 
+    }, 2000); 
+</script>
+@endif
 <section class="content-header">
     <div class="container-fluid">
       <div class="row mb-2">
@@ -50,7 +63,7 @@
                 <td>
                     <div class="d-grid gap-2 d-md-block">
                         <a class="btn btn-warning" href="/crud/edit/{{ $p->id }}" role="button">Edit</a>
-                        <a class="btn btn-danger" href="/crud/hapus/{{ $p->id }}" role="button">Hapus</a>
+                        <a class="btn btn-danger" href="/crud/hapus/{{ $p->id }}" role="button" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</a>
                     </div>          
                 </td>
             </tbody>
