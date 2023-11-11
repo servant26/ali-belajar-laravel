@@ -8,8 +8,8 @@
         <div class="col-sm-6">
           <h1>Daftar Produk</h1>
           <a class="btn btn-primary mt-4" href="/crud/tambah" role="button">Tambah</a>
-          <form class="d-flex mt-3" role="search" action="dashboard.php" method="get">
-            <input class="form-control me-2" type="search" name="kata_cari" placeholder="Cari materi..." aria-label="Cari materi..." value="<?php if(isset($_GET['kata_cari'])) { echo $_GET['kata_cari']; } ?>">
+          <form class="d-flex mt-3" role="search" action="/crud/cari" method="get">
+            <input class="form-control me-2" type="text" name="cari" placeholder="Cari materi..." aria-label="Cari materi..." value="{{ old('cari') }}">
             <button class="btn btn-primary" type="submit">Cari</button>
           </form>
         </div>
@@ -34,7 +34,7 @@
             </tr>
             </thead>
             @php
-                $no = 1;
+                $no = ($products->currentPage() - 1) * $products->perPage() + 1;
             @endphp
             @foreach ($products as $p)
             <tbody>
@@ -57,5 +57,28 @@
             @endforeach
         </table>
       </div>
+      <!-- Awal Pagination --> 
+      <div class="d-flex justify-content-center">
+        <ul class="pagination">
+            @if ($products->onFirstPage())
+                <li class="page-item disabled"><span class="page-link">Previous</span></li>
+            @else
+                <li class="page-item"><a class="page-link" href="{{ $products->previousPageUrl() }}">Previous</a></li>
+            @endif
+        
+            @for ($i = max(1, $products->currentPage() - 1); $i <= min($products->lastPage(), $products->currentPage() + 1); $i++)
+                <li class="page-item {{ $i == $products->currentPage() ? 'active' : '' }}">
+                    <a class="page-link" href="{{ $products->url($i) }}">{{ $i }}</a>
+                </li>
+            @endfor
+            
+            @if ($products->hasMorePages())
+                <li class="page-item"><a class="page-link" href="{{ $products->nextPageUrl() }}">Next</a></li>
+            @else
+                <li class="page-item disabled"><span class="page-link">Next</span></li>
+            @endif
+        </ul>
+      </div>
+      <!-- Akhir Pagination -->
 </section>
 @endsection

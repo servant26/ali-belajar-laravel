@@ -18,13 +18,22 @@ use App\Http\Controllers\CrudController;
 //     return view('welcome');
 // });
 
+//route home
 Route::get('/', [HelloController::class, 'index']);
+
+//route materi
 Route::get('/programming_web', [HelloController::class, 'programming_web']);
 Route::get('/programming_language', [HelloController::class, 'programming_language']);
+
+//route crud
 Route::get('/crud', [CrudController::class, 'index']);
 Route::get('/crud/tambah', [CrudController::class, 'tambah']);
 Route::post('/crud/add', [CrudController::class, 'add']);
 Route::get('/crud/hapus/{id}', [CrudController::class, 'hapus']);
 Route::get('/crud/edit/{id}', [CrudController::class, 'edit']);
 Route::post('/crud/update', [CrudController::class, 'update']);
+
+//route search
+Route::get('/crud/cari',[CrudController::class, 'cari']);
+
 

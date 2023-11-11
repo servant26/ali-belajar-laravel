@@ -13,7 +13,7 @@ class CrudController extends Controller
         $products = DB::table('products')
         ->join('product_categories', 'products.category_id', '=', 'product_categories.id')
         ->select('products.*', 'product_categories.category_name')
-        ->get();
+        ->paginate(5);
         return view("crud",["products"=>$products]);
     }
 
@@ -85,5 +85,23 @@ class CrudController extends Controller
     
         return redirect('/crud');
     }
+
+	public function cari(Request $request)
+	{
+		// menangkap data pencarian
+		$cari = $request->cari;
+ 
+    	// mengambil data dari table pegawai sesuai pencarian data
+		$products = DB::table('products')
+        ->join('product_categories', 'products.category_id', '=', 'product_categories.id')
+        ->select('products.*', 'product_categories.category_name')
+		->where('product_name','like',"%".$cari."%")
+		->paginate(5);
+ 
+    	// mengirim data pegawai ke view index
+		return view('crud',['products' => $products]);
+ 
+	}
+    
     
 }
