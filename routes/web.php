@@ -1,8 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\CrudController;
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,27 +15,38 @@ use App\Http\Controllers\CrudController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 //route home
-Route::get('/', [HelloController::class, 'index']);
+// Route::get('/', [HelloController::class, 'index']);
 
-//route materi
-Route::get('/programming_web', [HelloController::class, 'programming_web']);
-Route::get('/programming_language', [HelloController::class, 'programming_language']);
-
-//route crud
-Route::get('/crud', [CrudController::class, 'index']);
-Route::get('/crud/tambah', [CrudController::class, 'tambah']);
-Route::post('/crud/add', [CrudController::class, 'add']);
-Route::get('/crud/hapus/{id}', [CrudController::class, 'hapus']);
-Route::get('/crud/edit/{id}', [CrudController::class, 'edit']);
-Route::post('/crud/update', [CrudController::class, 'update']);
-
-//route search
-Route::get('/crud/cari',[CrudController::class, 'cari']);
+// //route materi
+// Route::get('/programming_web', [HelloController::class, 'programming_web']);
+// Route::get('/programming_language', [HelloController::class, 'programming_language']);
 
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::middleware(['auth', 'verified'])->group(function () {
+    // Route CRUD
+        Route::prefix('crud')->group(function () {
+        Route::get('/', [CrudController::class, 'index']);
+        Route::get('/tambah', [CrudController::class, 'tambah']);
+        Route::post('/add', [CrudController::class, 'add']);
+        Route::get('/hapus/{id}', [CrudController::class, 'hapus']);
+        Route::get('/edit/{id}', [CrudController::class, 'edit']);
+        Route::put('/update/{id}', [CrudController::class, 'update']);
+        Route::get('/cari', [CrudController::class, 'cari']);
+    });
+    // Route Dashboard
+    Route::get('/dashboard', [HelloController::class, 'index'])->name('dashboard');
+});
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
