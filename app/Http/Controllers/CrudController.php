@@ -54,8 +54,20 @@ class CrudController extends Controller
 
     public function add(Request $request)
     {
-        $request->validate([
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        $request->validate([        
+            'product_name' => 'required|regex:/^[a-zA-Z\s]+$/',
+            'description'=> 'required|string',
+            'price'=> 'required|integer',
+            'stock'=> 'required|integer|max:100',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ],[
+            'product_name.required' => 'Mohon isi form ini',
+            'product_name.regex' => 'Masukkan hanya teks',
+            'description.required' => 'Mohon isi form ini',
+            'price.required' => 'Mohon isi form ini',   
+            'stock.required' => 'Mohon isi form ini',
+            'stock.max' => 'Maksimal 2 digit angka',
+            'image.required' => 'Upload gambar terlebih dahulu'
         ]);
     
         $imageName = time().'.'.$request->image->extension();
@@ -130,8 +142,19 @@ class CrudController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
-            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        $request->validate([        
+            'product_name' => 'required|regex:/^[a-zA-Z\s]+$/',
+            'description'=> 'required|string',
+            'price'=> 'required|integer',
+            'stock'=> 'required|integer|max:2',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+        ],[
+            'product_name.required' => 'Mohon isi form ini',
+            'product_name.regex' => 'Masukkan hanya teks',
+            'description.required' => 'Mohon isi form ini',
+            'price.required' => 'Mohon isi form ini',
+            'stock.required' => 'Mohon isi form ini',
+            'stock.max' => 'Maksimal 2 digit angka',
         ]);
 
         $product = Products::find($request->id);

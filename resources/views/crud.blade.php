@@ -58,7 +58,7 @@
                 </td>                           
                 <td>{{ $p->category_name }}</td>
                 <td>{{ $p->description }}</td>
-                <td>{{ $p->price }}</td>
+                <td>Rp {{ $p->price }}</td>
                 <td>{{ $p->stock }}</td>
                 <td>
                     <div class="d-grid gap-2 d-md-block">

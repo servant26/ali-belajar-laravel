@@ -10,31 +10,51 @@
             {{ csrf_field() }}
             <div class="mb-3">
               <label for="inputNama" class="form-label">Nama Produk</label>
-              <input type="text" class="form-control" id="inputNama" name="product_name" required>
+              <input type="text" id="inputNama" name="product_name" class="form-control @error('product_name') is-invalid @enderror" value="{{ old('product_name') }}" autofocus>
+              @error('product_name')
+                  <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
             </div>
+            <!-- Input Kategori -->
             <div class="mb-3">
                 <label for="inputKategori" class="form-label">Kategori</label>
-                <select class="form-select" id="inputKategori" name="category_id" required>
+                <select class="form-select" id="inputKategori" name="category_id">
                     <option value="1">Sports</option>
                     <option value="2">Daily</option>
                     <option value="3">Accessories</option>
                 </select>
             </div>
+            <!-- Input Deskripsi -->
             <div class="mb-3">
               <label for="inputDeskripsi" class="form-label">Deskripsi</label>
-              <textarea class="form-control" id="inputDeskripsi" name="description" rows="3" required></textarea>
+              <textarea class="form-control @error('description') is-invalid @enderror" id="inputDeskripsi" name="description" rows="3"></textarea>
+              @error('description')
+                  <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
             </div>
+            <!-- Input Harga -->
             <div class="mb-3">
               <label for="inputHarga" class="form-label">Harga</label>
-              <input type="number" class="form-control" id="inputHarga" name="price" required>
+              <input type="number" class="form-control @error('price') is-invalid @enderror" id="inputHarga" name="price">
+              @error('price')
+                  <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
             </div>
+            <!-- Input Stok -->
             <div class="mb-3">
               <label for="inputStok" class="form-label">Stok</label>
-              <input type="number" class="form-control" id="inputStok" name="stock" required>
+              <input type="number" class="form-control @error('stock') is-invalid @enderror" id="inputStok" name="stock">
+              @error('stock')
+                  <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
             </div>
+            <!-- Input Gambar -->
             <div class="mb-5">
               <label for="inputGambar" class="form-label">Unggah Gambar</label>
-              <input type="file" class="form-control" id="image" name="image" accept="image/*" required>
+              <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image" accept="image/*">
+              @error('image')
+                  <div class="invalid-feedback">{{ $message }}</div>
+              @enderror
             </div>
             <div class="d-grid gap-2 d-md-block">
               <a class="btn btn-danger" href="/crud" role="button">Kembali</a>
