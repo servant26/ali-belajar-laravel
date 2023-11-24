@@ -66,10 +66,9 @@ class CrudController extends Controller
             'description.required' => 'Mohon isi form ini',
             'price.required' => 'Mohon isi form ini',   
             'stock.required' => 'Mohon isi form ini',
-            'stock.max' => 'Maksimal 2 digit angka',
+            'stock.max' => 'Maksimal 100',
             'image.required' => 'Upload gambar terlebih dahulu'
         ]);
-    
         $imageName = time().'.'.$request->image->extension();
         $request->image->move(public_path('images'), $imageName);
     
@@ -84,7 +83,6 @@ class CrudController extends Controller
     
         return redirect('/crud')->with('success', 'Data berhasil ditambahkan');
     }    
-
     //query builder hapus
     // public function hapus($id){
     //     DB::table('products')->where('id',$id)->delete();
@@ -154,7 +152,7 @@ class CrudController extends Controller
             'description.required' => 'Mohon isi form ini',
             'price.required' => 'Mohon isi form ini',
             'stock.required' => 'Mohon isi form ini',
-            'stock.max' => 'Maksimal 2 digit angka',
+            'stock.max' => 'Maksimal 100',
         ]);
 
         $product = Products::find($request->id);
