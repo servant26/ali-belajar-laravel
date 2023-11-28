@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 // use Illuminate\Support\Facades\DB;
 use App\Models\Products;
+use App\Models\ProductCategories;
+
 
 class CrudController extends Controller
 {
@@ -23,12 +25,16 @@ class CrudController extends Controller
         $products = Products::join('product_categories', 'products.category_id', '=', 'product_categories.id')
         ->select('products.*', 'product_categories.category_name')
         ->paginate(5);
-        return view("crud",["products"=>$products]);
+        return view("pages.crud.crud",["products"=>$products]);
     }
 
-    public function tambah(){
-        return view("tambah");
+    public function tambah()
+    {
+        $categories = ProductCategories::all();
+    
+        return view("pages.crud.tambah", ["categories" => $categories]);
     }
+    
 
     //query builder tambah
     // public function add(Request $request)
@@ -58,7 +64,7 @@ class CrudController extends Controller
             'product_name' => 'required|regex:/^[a-zA-Z\s]+$/',
             'description'=> 'required|string',
             'price'=> 'required|integer',
-            'stock'=> 'required|integer|max:100',
+            'stock'=> 'required|integer',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ],[
             'product_name.required' => 'Mohon isi form ini',
@@ -66,7 +72,6 @@ class CrudController extends Controller
             'description.required' => 'Mohon isi form ini',
             'price.required' => 'Mohon isi form ini',   
             'stock.required' => 'Mohon isi form ini',
-            'stock.max' => 'Maksimal 100',
             'image.required' => 'Upload gambar terlebih dahulu'
         ]);
         $imageName = time().'.'.$request->image->extension();
@@ -101,10 +106,14 @@ class CrudController extends Controller
     //     return view('edit',['products'=>$products]);
     // }
 
-    public function edit($id){
-        $products = Products::find($id);
-        return view('edit',['products'=>$products]);
+    public function edit($id)
+    {
+        $product = Products::find($id); 
+        $categories = ProductCategories::all(); 
+    
+        return view("pages.crud.edit", ["product" => $product, "categories" => $categories]);
     }
+    
 
     //query builder update
     // public function update(Request $request)
@@ -144,7 +153,7 @@ class CrudController extends Controller
             'product_name' => 'required|regex:/^[a-zA-Z\s]+$/',
             'description'=> 'required|string',
             'price'=> 'required|integer',
-            'stock'=> 'required|integer|max:2',
+            'stock'=> 'required|integer',
             'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ],[
             'product_name.required' => 'Mohon isi form ini',
@@ -152,7 +161,6 @@ class CrudController extends Controller
             'description.required' => 'Mohon isi form ini',
             'price.required' => 'Mohon isi form ini',
             'stock.required' => 'Mohon isi form ini',
-            'stock.max' => 'Maksimal 100',
         ]);
 
         $product = Products::find($request->id);
@@ -195,6 +203,6 @@ class CrudController extends Controller
             ->where('product_name', 'like', "%$cari%")
             ->paginate(5);
 
-        return view('crud', ['products' => $products]);
+        return view('pages.crud.crud', ['products' => $products]);
     }
 }

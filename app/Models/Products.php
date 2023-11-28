@@ -17,7 +17,7 @@ class Products extends Model
         'price',
         'stock',
         'image'
-    ] ;
+    ];
     
     public function product_categories(){
         return $this->hasMany(ProductCategories::class);

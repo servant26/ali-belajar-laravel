@@ -17,13 +17,15 @@
             </div>
             <!-- Input Kategori -->
             <div class="mb-3">
-                <label for="inputKategori" class="form-label">Kategori</label>
-                <select class="form-select" id="inputKategori" name="category_id">
-                    <option value="1">Sports</option>
-                    <option value="2">Daily</option>
-                    <option value="3">Accessories</option>
-                </select>
+              <label for="inputKategori" class="form-label">Kategori</label>
+              <select class="form-select" id="inputKategori" name="category_id">
+                  @foreach($categories as $category)
+                      <option value="{{ $category->id }}">{{ ucwords($category->category_name) }}</option>
+                  @endforeach
+              </select>
             </div>
+          
+          
             <!-- Input Deskripsi -->
             <div class="mb-3">
               <label for="inputDeskripsi" class="form-label">Deskripsi</label>

@@ -22,7 +22,7 @@
           <h1>Daftar Produk</h1>
           <a class="btn btn-primary mt-4" href="/crud/tambah" role="button">Tambah</a>
           <form class="d-flex mt-3" role="search" action="/crud/cari" method="get">
-            <input class="form-control me-2" type="text" name="cari" placeholder="Cari materi..." aria-label="Cari materi..." value="{{ old('cari') }}">
+            <input class="form-control me-2" type="text" name="cari" placeholder="Cari produk..." aria-label="Cari produk..." value="{{ old('cari') }}">
             <button class="btn btn-primary" type="submit">Cari</button>
           </form>
         </div>
@@ -49,25 +49,29 @@
             @php
                 $no = ($products->currentPage() - 1) * $products->perPage() + 1;
             @endphp
-            @foreach ($products as $p)
-            <tbody>
-                <td>{{ $no++ }}</td>
-                <td>{{ $p->product_name }}</td>
-                <td>
-                  <img src="{{ asset($p->image) }}" alt="Gambar Produk" width="100">
-                </td>                           
-                <td>{{ $p->category_name }}</td>
-                <td>{{ $p->description }}</td>
-                <td>Rp {{ $p->price }}</td>
-                <td>{{ $p->stock }}</td>
-                <td>
-                    <div class="d-grid gap-2 d-md-block">
-                        <a class="btn btn-warning" href="/crud/edit/{{ $p->id }}" role="button">Edit</a>
-                        <a class="btn btn-danger" href="/crud/hapus/{{ $p->id }}" role="button" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</a>
-                    </div>          
-                </td>
-            </tbody>
-            @endforeach
+            @if($products->count() > 0)
+                @foreach ($products as $p)
+                <tbody>
+                    <td>{{ $no++ }}</td>
+                    <td>{{ ucwords($p->product_name) }}</td>  
+                    <td>
+                    <img src="{{ asset($p->image) }}" alt="Gambar Produk" width="100">
+                    </td>          
+                    <td>{{ ucwords($p->category_name) }}</td>  
+                    <td>{{ ucwords($p->description) }}</td>                
+                    <td>Rp {{ $p->price }}</td>
+                    <td>{{ $p->stock }}</td>
+                    <td>
+                        <div class="d-grid gap-2 d-md-block">
+                            <a class="btn btn-warning" href="/crud/edit/{{ $p->id }}" role="button">Edit</a>
+                            <a class="btn btn-danger" href="/crud/hapus/{{ $p->id }}" role="button" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</a>
+                        </div>          
+                    </td>
+                </tbody>
+                @endforeach
+            @else
+                <td colspan="8">Data tidak ditemukan</td>
+            @endif
         </table>
       </div>
       <!-- Awal Pagination --> 

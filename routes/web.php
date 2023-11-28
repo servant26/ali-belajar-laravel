@@ -3,6 +3,9 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HelloController;
 use App\Http\Controllers\CrudController;
+use App\Http\Controllers\ChartsController;
+use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,6 +43,24 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
     // Route Dashboard
     Route::get('/dashboard', [HelloController::class, 'index'])->name('dashboard');
+
+    Route::get('/chart', [ChartsController::class, 'chart']);
+
+    Route::prefix('categories')->group(function () {
+        Route::get('/', [CategoriesController::class, 'index']);
+        Route::get('/tambah', [CategoriesController::class, 'tambah']);
+        Route::post('/add', [CategoriesController::class, 'add']);
+        Route::get('/hapus/{id}', [CategoriesController::class, 'hapus']);
+        Route::get('/edit/{id}', [CategoriesController::class, 'edit']);
+        Route::put('/update/{id}', [CategoriesController::class, 'update']);
+        Route::get('/cari', [CategoriesController::class, 'cari']);
+    });
+
+    Route::prefix('user')->group(function () {
+        Route::get('/', [UsersController::class, 'user']);
+        Route::get('/cariuser', [UsersController::class, 'cariuser']);
+    });
+
 });
 
 
