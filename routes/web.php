@@ -44,7 +44,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // Route Dashboard
     Route::get('/dashboard', [HelloController::class, 'index'])->name('dashboard');
 
-    Route::get('/chart', [ChartsController::class, 'chart']);
+    Route::prefix('chart')->group(function () {
+        Route::get('/pie', [ChartsController::class, 'pie']);
+        Route::get('/line', [ChartsController::class, 'line']);
+    });
 
     Route::prefix('categories')->group(function () {
         Route::get('/', [CategoriesController::class, 'index']);

@@ -43,12 +43,27 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/chart" class="nav-link">
-              <i class="nav-icon fa fa-chart-area"></i>
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
               <p>
                 Chart Produk
+                <i class="right fas fa-angle-left"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/chart/pie" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Pie Chart</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/chart/line" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Line Chart</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
             <a href="/categories" class="nav-link">
