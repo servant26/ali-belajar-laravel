@@ -10,36 +10,39 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-
-    // public function dashboard(){
-    //     return view('pages.dashboard.dashboard');
-    // }
     public function column()
     {
         $products = Products::all();
-
-        $productData = Products::select('product_name', 'price', 'stock', 'created_at')
-            ->orderBy('created_at')
-            ->get();
-        $data['product_name'] = $productData->pluck('product_name')->toArray();
-        $data['price'] = $productData->pluck('price')->toArray();
-        $data['stock'] = $productData->pluck('stock')->toArray();
-        $data['created_at'] = $productData->pluck('created_at')->map(function ($date) {
-            return $date->format('Y-m-d');
-        })->toArray();
-
-        return view('pages.dashboard.column', compact('products', 'data'));
+        $productData = Products::select('category_id', 'price', 'stock')
+            ->get()
+            ->groupBy('category_id')
+            ->map(function ($category) {
+                return [
+                    'total_products' => $category->count(),
+                    'total_price' => $category->sum('price'),
+                    'total_stock' => $category->sum('stock')
+                ];
+            });
+    
+        return view('pages.dashboard.column', compact('products', 'productData'));
     }
+    
 
     public function pie()
     {
-        $productData = Products::select('product_name', 'price', 'stock', 'created_at')
-            ->orderBy('created_at')
-            ->get();
+        $productsByCategory = Products::select('category_id', 
+                DB::raw('count(*) as total_produk'), 
+                DB::raw('sum(price) as total_harga'), 
+                DB::raw('sum(stock) as total_stok'))
+                ->groupBy('category_id')
+                ->get();
+        $data = [];
+        $data['category_id'] = $productsByCategory->pluck('category_id')->toArray();
+        $data['total_produk'] = $productsByCategory->pluck('total_produk')->toArray();
+        $data['total_harga'] = $productsByCategory->pluck('total_harga')->toArray();
+        $data['total_stok'] = $productsByCategory->pluck('total_stok')->toArray();
     
-        $data['product_name'] = $productData->pluck('product_name')->toArray();
-        $data['stock'] = $productData->pluck('stock')->toArray();
-        return view('pages.dashboard.pie', compact('data'));
+        return view('pages.dashboard.pie')->with('data', $data);
     }
     
     public function dashboard()

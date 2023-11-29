@@ -7,30 +7,38 @@
     <div id="container"></div><br>
     <a href="/dashboard/column" class="btn btn-primary">Lihat Versi Column Chart</a>
 </figure>
+<script src="https://code.highcharts.com/highcharts.js"></script>
 <script>
-    var nama_produk = <?php echo json_encode($data['product_name']); ?>;
-    var stok = <?php echo json_encode($data['stock']); ?>;
+    var category_id = <?php echo json_encode($data['category_id']); ?>;
+    var total_produk = <?php echo json_encode($data['total_produk']); ?>;
+    var total_harga = <?php echo json_encode($data['total_harga']); ?>;
+    var total_stok = <?php echo json_encode($data['total_stok']); ?>;
+    
     document.addEventListener('DOMContentLoaded', function () {
         Highcharts.chart('container', {
             chart: {
                 type: 'pie'
             },
             title: {
-                text: 'Jumlah Stok Sepatu',
+                text: 'Informasi Produk per Kategori',
                 style: {
-                    color: '#ffffff' 
+                    color: '#000000'
                 }
             },
             series: [{
-                name: 'Jumlah Stok',
+                name: 'Jumlah Produk',
                 colorByPoint: true,
-                data: stok.map((stock, index) => ({
-                    name: nama_produk[index],
-                    y: stock
+                data: category_id.map((id, index) => ({
+                    name: 'Category ' + id,
+                    y: total_produk[index],
+                    harga: total_harga[index], 
+                    stok: total_stok[index] 
                 }))
             }],
             tooltip: {
-                pointFormat: '{series.name}: <b>{point.y}</b>',
+                pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: <b>{point.y}</b><br/>' +
+                    'Total Harga: <b>{point.harga}</b><br/>' +
+                    'Total Stok: <b>{point.stok}</b>',
                 style: {
                     color: '#ffffff'
                 }
