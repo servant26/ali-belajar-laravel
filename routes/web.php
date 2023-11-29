@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\BioController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CrudController;
 use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\BioController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,19 +18,19 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-//route home
-// Route::get('/', [HelloController::class, 'index']);
-
-// //route materi
-// Route::get('/programming_web', [HelloController::class, 'programming_web']);
-// Route::get('/programming_language', [HelloController::class, 'programming_language']);
-
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 Route::middleware(['auth', 'verified'])->group(function () {
+    // Route Dashboard
+    Route::prefix('dashboard')->group(function () {
+        Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
+        Route::get('/column', [DashboardController::class, 'column'])->name('column');
+        Route::get('/pie', [DashboardController::class, 'pie'])->name('pie');
+    });
+
     // Route CRUD
         Route::prefix('crud')->group(function () {
         Route::get('/', [CrudController::class, 'index']);
@@ -42,10 +42,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/cari', [CrudController::class, 'cari']);
     });
 
-    Route::get('/bio', [BioController::class, 'bio']);
-
-    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
-
+    // Route Kategori Produk
     Route::prefix('categories')->group(function () {
         Route::get('/', [CategoriesController::class, 'index']);
         Route::get('/tambah', [CategoriesController::class, 'tambah']);
@@ -56,10 +53,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/cari', [CategoriesController::class, 'cari']);
     });
 
+    // Route User
     Route::prefix('user')->group(function () {
         Route::get('/', [UsersController::class, 'user']);
         Route::get('/cariuser', [UsersController::class, 'cariuser']);
     });
+
+    //Route Bio
+    Route::get('/bio', [BioController::class, 'bio']);
 
 });
 

@@ -10,7 +10,7 @@ class UsersController extends Controller
 {
     public function user(){
         $user = User::paginate(5);
-        return view("pages.user",["user"=>$user]);
+        return view("pages.other.user",["user"=>$user]);
     }
 
     public function cariuser(Request $request)
@@ -19,7 +19,7 @@ class UsersController extends Controller
         
         $user = User::where('name', 'like', "%$cariuser%")->paginate(5); // Lakukan pencarian langsung dalam query
     
-        return view('pages.user', ['user' => $user]); // Kirim data pengguna hasil pencarian ke view
+        return view('pages.other.user', ['user' => $user]); // Kirim data pengguna hasil pencarian ke view
     }
     
 }

@@ -8,7 +8,7 @@ class BioController extends Controller
 {
     //
     public function bio(){
-        return view("pages.bio");
+        return view("pages.other.bio");
     }
 }
 
