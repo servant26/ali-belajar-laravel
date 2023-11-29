@@ -10,6 +10,24 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
+    public function dashboard()
+    {
+        $totalProducts = Products::count();
+
+        $totalStock = Products::sum('stock');
+
+        $totalCategories = ProductCategories::count();
+
+        $totalPrice = Products::sum('price');
+
+        return view('pages.dashboard.dashboard', [
+            'totalProducts' => $totalProducts,
+            'totalStock' => $totalStock,
+            'totalCategories' => $totalCategories,
+            'totalPrice' => $totalPrice,
+        ]);
+    }
+
     public function column()
     {
         $productsData = Products::select('products.category_id', 'products.price', 'products.stock', 'product_categories.category_name')
@@ -50,25 +68,6 @@ class DashboardController extends Controller
         ];
     
         return view('pages.dashboard.pie')->with('data', $data);
-    }
-    
-    
-    public function dashboard()
-    {
-        $totalProducts = Products::count();
-
-        $totalStock = Products::sum('stock');
-
-        $totalCategories = ProductCategories::count();
-
-        $totalPrice = Products::sum('price');
-
-        return view('pages.dashboard.dashboard', [
-            'totalProducts' => $totalProducts,
-            'totalStock' => $totalStock,
-            'totalCategories' => $totalCategories,
-            'totalPrice' => $totalPrice,
-        ]);
     }
     
 }
