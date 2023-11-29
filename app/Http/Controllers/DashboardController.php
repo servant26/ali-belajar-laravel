@@ -44,16 +44,19 @@ class DashboardController extends Controller
     
     public function dashboard()
     {
+        $totalProducts = Products::count();
+
         $totalStock = Products::sum('stock');
 
         $totalCategories = ProductCategories::count();
 
-        $totalUsers = User::count();
+        $totalPrice = Products::sum('price');
 
         return view('pages.dashboard.dashboard', [
+            'totalProducts' => $totalProducts,
             'totalStock' => $totalStock,
             'totalCategories' => $totalCategories,
-            'totalUsers' => $totalUsers,
+            'totalPrice' => $totalPrice,
         ]);
     }
     

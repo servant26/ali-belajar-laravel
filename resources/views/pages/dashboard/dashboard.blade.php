@@ -13,8 +13,8 @@
               <div class="small-box bg-info">
                 <div class="inner">
                   <h1 class="nav-icon fa fa-cart-plus"></h1>
-                  <h3>{{ $totalStock }}</h3>
-                  <p>Jumlah Stok</p>
+                  <h3>{{ $totalProducts }}</h3>
+                  <p>Jumlah Produk</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-bag"></i>
@@ -29,7 +29,7 @@
                 <div class="inner">
                   <h1 class="nav-icon fa fa-book"></h1>
                   <h3>{{ $totalCategories }}<sup style="font-size: 20px"></sup></h3>
-                  <p>Jumlah Kategori Produk</p>
+                  <p>Jumlah Kategori</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-stats-bars"></i>
@@ -42,14 +42,14 @@
               <!-- small box -->
               <div class="small-box bg-warning">
                 <div class="inner">
-                  <h1 class="nav-icon fas fa-user"></h1>
-                  <h3>{{ $totalUsers }}</h3>
-                  <p>Jumlah Pengguna</p>
+                  <h1 class="nav-icon fa fa-credit-card"></h1>
+                  <h3>Rp {{ $totalPrice }}</h3>
+                  <p>Total Harga</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
                 </div>
-                <a href="/user" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="/crud" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
@@ -58,13 +58,13 @@
               <div class="small-box bg-danger">
                 <div class="inner">
                   <h1 class="nav-icon fas fa-chart-pie"></h1>
-                  <h3>%</h3>
-                  <p>Analisis Data</p>
+                  <h3>{{ $totalStock }}</h3>
+                  <p>Jumlah Stok</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
                 </div>
-                <a href="/dashboard/column" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="/crud" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <!-- ./col -->
