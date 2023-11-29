@@ -12,10 +12,10 @@ class DashboardController extends Controller
 {
     public function column()
     {
-        $products = Products::all();
-        $productData = Products::select('category_id', 'price', 'stock')
+        $productsData = Products::select('products.category_id', 'products.price', 'products.stock', 'product_categories.category_name')
+            ->join('product_categories', 'products.category_id', '=', 'product_categories.id')
             ->get()
-            ->groupBy('category_id')
+            ->groupBy('category_name')
             ->map(function ($category) {
                 return [
                     'total_products' => $category->count(),
@@ -24,26 +24,34 @@ class DashboardController extends Controller
                 ];
             });
     
-        return view('pages.dashboard.column', compact('products', 'productData'));
+        return view('pages.dashboard.column', compact('productsData'));
     }
+    
     
 
     public function pie()
     {
-        $productsByCategory = Products::select('category_id', 
-                DB::raw('count(*) as total_produk'), 
-                DB::raw('sum(price) as total_harga'), 
-                DB::raw('sum(stock) as total_stok'))
-                ->groupBy('category_id')
-                ->get();
-        $data = [];
-        $data['category_id'] = $productsByCategory->pluck('category_id')->toArray();
-        $data['total_produk'] = $productsByCategory->pluck('total_produk')->toArray();
-        $data['total_harga'] = $productsByCategory->pluck('total_harga')->toArray();
-        $data['total_stok'] = $productsByCategory->pluck('total_stok')->toArray();
+        $productsByCategory = Products::select(
+            'products.category_id',
+            'product_categories.category_name',
+            DB::raw('count(*) as total_produk'),
+            DB::raw('sum(products.price) as total_harga'),
+            DB::raw('sum(products.stock) as total_stok')
+        )
+            ->join('product_categories', 'products.category_id', '=', 'product_categories.id')
+            ->groupBy('products.category_id', 'product_categories.category_name')
+            ->get();
+    
+        $data = [
+            'category_names' => $productsByCategory->pluck('category_name')->toArray(),
+            'total_produk' => $productsByCategory->pluck('total_produk')->toArray(),
+            'total_harga' => $productsByCategory->pluck('total_harga')->toArray(),
+            'total_stok' => $productsByCategory->pluck('total_stok')->toArray(),
+        ];
     
         return view('pages.dashboard.pie')->with('data', $data);
     }
+    
     
     public function dashboard()
     {

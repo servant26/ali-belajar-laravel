@@ -7,9 +7,8 @@
     <div id="container"></div><br>
     <a href="/dashboard/column" class="btn btn-primary">Lihat Versi Column Chart</a>
 </figure>
-<script src="https://code.highcharts.com/highcharts.js"></script>
 <script>
-    var category_id = <?php echo json_encode($data['category_id']); ?>;
+    var category_names = <?php echo json_encode($data['category_names']); ?>;
     var total_produk = <?php echo json_encode($data['total_produk']); ?>;
     var total_harga = <?php echo json_encode($data['total_harga']); ?>;
     var total_stok = <?php echo json_encode($data['total_stok']); ?>;
@@ -28,11 +27,11 @@
             series: [{
                 name: 'Jumlah Produk',
                 colorByPoint: true,
-                data: category_id.map((id, index) => ({
-                    name: 'Category ' + id,
+                data: category_names.map((name, index) => ({
+                    name: name,
                     y: total_produk[index],
-                    harga: total_harga[index], 
-                    stok: total_stok[index] 
+                    harga: total_harga[index],
+                    stok: total_stok[index]
                 }))
             }],
             tooltip: {

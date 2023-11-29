@@ -8,10 +8,10 @@
         <a href="/dashboard/pie" class="btn btn-primary">Lihat Versi Pie Chart</a>
     </figure>
     <script>
-        var categories = <?php echo json_encode($productData->keys()->toArray()); ?>;
-        var totalProducts = <?php echo json_encode($productData->pluck('total_products')->toArray()); ?>;
-        var totalPrices = <?php echo json_encode($productData->pluck('total_price')->toArray()); ?>;
-        var totalStocks = <?php echo json_encode($productData->pluck('total_stock')->toArray()); ?>;
+        var categories = <?php echo json_encode($productsData->keys()->toArray()); ?>;
+        var totalProducts = <?php echo json_encode($productsData->pluck('total_products')->toArray()); ?>;
+        var totalPrices = <?php echo json_encode($productsData->pluck('total_price')->toArray()); ?>;
+        var totalStocks = <?php echo json_encode($productsData->pluck('total_stock')->toArray()); ?>;
         
         Highcharts.chart('container', {
             legend: {
