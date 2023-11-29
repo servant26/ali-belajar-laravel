@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\HelloController;
+use App\Http\Controllers\BioController;
 use App\Http\Controllers\CrudController;
-use App\Http\Controllers\ChartsController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,13 +41,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::put('/update/{id}', [CrudController::class, 'update']);
         Route::get('/cari', [CrudController::class, 'cari']);
     });
-    // Route Dashboard
-    Route::get('/dashboard', [HelloController::class, 'index'])->name('dashboard');
 
-    Route::prefix('chart')->group(function () {
-        Route::get('/pie', [ChartsController::class, 'pie']);
-        Route::get('/line', [ChartsController::class, 'line']);
-    });
+    Route::get('/bio', [BioController::class, 'bio']);
+
+    Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard');
 
     Route::prefix('categories')->group(function () {
         Route::get('/', [CategoriesController::class, 'index']);

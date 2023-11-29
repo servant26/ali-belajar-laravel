@@ -29,9 +29,9 @@
           <li class="nav-item">
             <a href="/dashboard" class="nav-link">
               <i class="nav-icon fa fa-home"></i>
-              <p>
-                Home
-              </p>
+                <p>
+                  Dashboard
+                </p>
             </a>
           </li>
           <li class="nav-item">
@@ -41,29 +41,6 @@
                 CRUD Produk
               </p>
             </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-pie"></i>
-              <p>
-                Chart Produk
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/chart/pie" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Pie Chart</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/chart/line" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Line Chart</p>
-                </a>
-              </li>
-            </ul>
           </li>
           <li class="nav-item">
             <a href="/categories" class="nav-link">
@@ -78,6 +55,14 @@
               <i class="nav-icon fa fa-user"></i>
               <p>
                 Daftar Pengguna
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="/bio" class="nav-link">
+              <i class="nav-icon fa fa-user"></i>
+              <p>
+                Bio Pembuat Web
               </p>
             </a>
           </li>
