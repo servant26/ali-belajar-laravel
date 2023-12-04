@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CrudController;
 use App\Http\Controllers\CategoriesController;
@@ -19,19 +20,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('pages.login.login');
+// });
+    
+//login
+Route::get('/', [LoginController::class, 'index'])->name('login');
+Route::post('/login-proses', [LoginController::class, 'login_proses'])->name('login-proses');
+Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
+Route::get('/register', [LoginController::class, 'register'])->name('register');
+Route::post('/register-proses', [LoginController::class, 'register_proses'])->name('register-proses');
+
+
+Route::group(['middleware' => ['auth']], function(){
+// Route Dashboard
+Route::prefix('dashboard')->group(function () {
+    Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/column', [DashboardController::class, 'column'])->name('column');
+    Route::get('/pie', [DashboardController::class, 'pie'])->name('pie');
 });
-
-Route::middleware(['auth', 'verified'])->group(function () {
-    // Route Dashboard
-    Route::prefix('dashboard')->group(function () {
-        Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
-        Route::get('/column', [DashboardController::class, 'column'])->name('column');
-        Route::get('/pie', [DashboardController::class, 'pie'])->name('pie');
-    });
-
-    // Route CRUD
+// Route CRUD
         Route::prefix('crud')->group(function () {
         Route::get('/', [CrudController::class, 'index']);
         Route::get('/tambah', [CrudController::class, 'tambah']);
@@ -61,14 +71,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     //Route Bio
     Route::get('/bio', [BioController::class, 'bio']);
-
 });
 
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-require __DIR__.'/auth.php';

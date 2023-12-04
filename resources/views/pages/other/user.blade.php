@@ -19,33 +19,33 @@
     <div class="container-fluid">
         <!-- =========================================================== -->
         <h5 class="mt-1 mb-2"></h5>
-        <table class="table table-striped table-dark">
-            <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama</th>
-                <th>Email</th>
-                <th>Tanggal Registrasi</th>
-                <th>Tanggal Merubah Data</th>
-            </tr>
-            </thead>
-            @php
-                $no = ($user->currentPage() - 1) * $user->perPage() + 1;
-            @endphp
-            @if($user->count() > 0)
-                @foreach ($user as $u)
-                    <tbody>
-                        <td>{{ $no++ }}</td>
-                        <td>{{ ucwords($u->name) }}</td>                       
-                        <td>{{ $u->email }}</td>
-                        <td>{{ $u->created_at }}</td>
-                        <td>{{ $u->updated_at }}</td>
-                    </tbody>
-                @endforeach
-            @else
-                <td colspan="8">Data tidak ditemukan</td>
-            @endif
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped table-dark">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama</th>
+                    <th>Email</th>
+                    <th>Tanggal Mendaftar</th>
+                </tr>
+                </thead>
+                @php
+                    $no = ($user->currentPage() - 1) * $user->perPage() + 1;
+                @endphp
+                @if($user->count() > 0)
+                    @foreach ($user as $u)
+                        <tbody>
+                            <td>{{ $no++ }}</td>
+                            <td>{{ ucwords($u->name) }}</td>                       
+                            <td>{{ $u->email }}</td>
+                            <td>{{ $u->created_at }}</td>
+                        </tbody>
+                    @endforeach
+                @else
+                    <td colspan="8">Data tidak ditemukan</td>
+                @endif
+            </table>
+        </div>
       </div>
       <!-- Awal Pagination --> 
       <div class="d-flex justify-content-center">

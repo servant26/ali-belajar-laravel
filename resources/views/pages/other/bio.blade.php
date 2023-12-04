@@ -26,19 +26,19 @@
 
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item text-white">
-                    <b>Github</b> <a href="#" class="btn btn-dark float-right"><b>Follow</b></a>
+                    <b>Github</b> <a href="https://github.com/servant26" target="_blank" class="btn btn-dark float-right"><b>Follow</b></a>
                   </li>
                   <li class="list-group-item text-white">
-                    <b>Tiktok</b> <a href="#" class="btn btn-dark float-right"><b>Follow</b></a>
+                    <b>Tiktok</b> <a href="https://www.tiktok.com/@servant_arthur07" target="_blank" class="btn btn-dark float-right"><b>Follow</b></a>
                   </li>
                   <li class="list-group-item text-white">
-                    <b>Facebook</b> <a href="#" class="btn btn-primary float-right"><b>Follow</b></a>
+                    <b>Facebook</b> <a href="https://www.facebook.com/otaku.art.35" target="_blank" class="btn btn-primary float-right"><b>Follow</b></a>
                   </li>
                   <li class="list-group-item text-white">
-                    <b>Instagram</b> <a href="#" class="btn btn-danger float-right"><b>Follow</b></a>
+                    <b>Instagram</b> <a href="https://www.instagram.com/servant_arthur07/" target="_blank" class="btn btn-danger float-right"><b>Follow</b></a>
                   </li>
                   <li class="list-group-item text-white">
-                    <b>Youtube</b> <a href="#" class="btn btn-danger float-right"><b>Follow</b></a>
+                    <b>Youtube</b> <a href="https://www.youtube.com/@alikhatami3910" target="_blank" class="btn btn-danger float-right"><b>Follow</b></a>
                   </li>
                 </ul>
               </div>

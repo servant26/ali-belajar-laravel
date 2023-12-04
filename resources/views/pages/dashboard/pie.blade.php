@@ -2,7 +2,7 @@
 @section('title', 'Pie Chart')
 
 @section('content')
-<figure class="highcharts-figure">
+<figure class="highcharts-figure m-3">
     <h3>Pie Chart :</h3>
     <div id="container"></div><br>
     <a href="/dashboard/column" class="btn btn-primary">Lihat Versi Column Chart</a>

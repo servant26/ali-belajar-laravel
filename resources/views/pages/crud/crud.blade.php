@@ -33,46 +33,48 @@
     <div class="container-fluid">
         <!-- =========================================================== -->
         <h5 class="mt-1 mb-2"></h5>
-        <table class="table table-striped table-dark">
-            <thead>
-            <tr>
-                <th>No</th>
-                <th>Nama Produk</th>
-                <th>Gambar</th>
-                <th>Kategori</th>
-                <th>Deskripsi</th>
-                <th>Harga</th>
-                <th>Stok</th>
-                <th>Aksi</th>
-            </tr>
-            </thead>
-            @php
-                $no = ($products->currentPage() - 1) * $products->perPage() + 1;
-            @endphp
-            @if($products->count() > 0)
-                @foreach ($products as $p)
-                <tbody>
-                    <td>{{ $no++ }}</td>
-                    <td>{{ ucwords($p->product_name) }}</td>  
-                    <td>
-                    <img src="{{ asset($p->image) }}" alt="Gambar Produk" width="100">
-                    </td>          
-                    <td>{{ ucwords($p->category_name) }}</td>  
-                    <td>{{ ucwords($p->description) }}</td>                
-                    <td>Rp {{ $p->price }}</td>
-                    <td>{{ $p->stock }}</td>
-                    <td>
-                        <div class="d-grid gap-2 d-md-block">
-                            <a class="btn btn-warning" href="/crud/edit/{{ $p->id }}" role="button">Edit</a>
-                            <a class="btn btn-danger" href="/crud/hapus/{{ $p->id }}" role="button" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</a>
-                        </div>          
-                    </td>
-                </tbody>
-                @endforeach
-            @else
-                <td colspan="8">Data tidak ditemukan</td>
-            @endif
-        </table>
+        <div class="table-responsive">
+            <table class="table table-striped table-dark">
+                <thead>
+                <tr>
+                    <th>No</th>
+                    <th>Nama Produk</th>
+                    <th>Gambar</th>
+                    <th>Kategori</th>
+                    <th>Deskripsi</th>
+                    <th>Harga</th>
+                    <th>Stok</th>
+                    <th>Aksi</th>
+                </tr>
+                </thead>
+                @php
+                    $no = ($products->currentPage() - 1) * $products->perPage() + 1;
+                @endphp
+                @if($products->count() > 0)
+                    @foreach ($products as $p)
+                    <tbody>
+                        <td>{{ $no++ }}</td>
+                        <td>{{ ucwords($p->product_name) }}</td>  
+                        <td>
+                        <img src="{{ asset($p->image) }}" alt="Gambar Produk" width="100">
+                        </td>          
+                        <td>{{ ucwords($p->category_name) }}</td>  
+                        <td>{{ ucwords($p->description) }}</td>                
+                        <td>Rp {{ $p->price }}</td>
+                        <td>{{ $p->stock }}</td>
+                        <td>
+                            <div class="d-grid gap-2 d-md-block">
+                                <a class="btn btn-warning" href="/crud/edit/{{ $p->id }}" role="button">Edit</a>
+                                <a class="btn btn-danger" href="/crud/hapus/{{ $p->id }}" role="button" onclick="return confirm('Anda yakin ingin menghapus data ini?')">Hapus</a>
+                            </div>          
+                        </td>
+                    </tbody>
+                    @endforeach
+                @else
+                    <td colspan="8">Data tidak ditemukan</td>
+                @endif
+            </table>
+        </div>
       </div>
       <!-- Awal Pagination --> 
       <div class="d-flex justify-content-center">
